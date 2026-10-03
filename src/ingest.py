@@ -3,7 +3,7 @@ import argparse
 import logging
 import sys
 import time
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -54,7 +54,7 @@ def to_bronze_frame(df: pd.DataFrame, ticker: str, ingested_at: datetime) -> pd.
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--start", default="2016-01-01")
-    parser.add_argument("--end", default=date.today().isoformat())
+    parser.add_argument("--end", default=(date.today() + timedelta(days=1)).isoformat())
     parser.add_argument("--tickers", nargs="*", default=WATCHLIST)
     args = parser.parse_args()
 
